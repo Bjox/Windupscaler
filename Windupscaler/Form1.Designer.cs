@@ -28,13 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.windowList = new System.Windows.Forms.ListBox();
+            this.refreshBtn = new System.Windows.Forms.Button();
+            this.upscaleBtn = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // windowList
+            // 
+            this.windowList.FormattingEnabled = true;
+            this.windowList.Location = new System.Drawing.Point(12, 12);
+            this.windowList.Name = "windowList";
+            this.windowList.Size = new System.Drawing.Size(280, 225);
+            this.windowList.TabIndex = 0;
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Location = new System.Drawing.Point(12, 243);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshBtn.TabIndex = 1;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
+            // upscaleBtn
+            // 
+            this.upscaleBtn.Location = new System.Drawing.Point(93, 243);
+            this.upscaleBtn.Name = "upscaleBtn";
+            this.upscaleBtn.Size = new System.Drawing.Size(75, 23);
+            this.upscaleBtn.TabIndex = 2;
+            this.upscaleBtn.Text = "Upscale!";
+            this.upscaleBtn.UseVisualStyleBackColor = true;
+            this.upscaleBtn.Click += new System.EventHandler(this.upscaleBtn_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(304, 279);
+            this.Controls.Add(this.upscaleBtn);
+            this.Controls.Add(this.refreshBtn);
+            this.Controls.Add(this.windowList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.Name = "Form1";
+            this.Text = "Windupscaler";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox windowList;
+        private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.Button upscaleBtn;
     }
 }
 
