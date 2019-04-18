@@ -96,6 +96,21 @@ namespace Windupscaler
         [DllImport("user32.dll", SetLastError=true)]
         internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, SetWindowPosFlags uFlags);
 
+        [Flags()]
+        internal enum WindowMessages : uint
+        {
+            WM_GETICON = 0x007F
+        }
+
+        [DllImport("user32.dll")]
+        internal static extern int SendMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        internal static extern IntPtr CopyIcon(IntPtr hIcon);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool DrawIconEx(IntPtr hdc, int xLeft, int yTop, IntPtr hIcon, int cxWidth, int cyHeight, int istepIfAniCur, IntPtr hbrFlickerFreeDraw, int diFlags);
+
     }
 
     public partial class Window
@@ -160,6 +175,16 @@ namespace Windupscaler
             }
         }
 
+        public object SmallIcon
+        {
+            get
+            {
+                const int ICON_SMALL = 0;
+                var iconHandle = SendMessage(Handle, (uint)WindowMessages.WM_GETICON, ICON_SMALL, 0);
+                return null;
+            }
+        }
+
         /// <summary>
         /// Move and resize this window.
         /// </summary>
@@ -174,9 +199,12 @@ namespace Windupscaler
             return User32.MoveWindow(Handle, x, y, width, height, repaint);
         }
 
-        public void SetPopup()
+        /// <summary>
+        /// Remove the window border.
+        /// </summary>
+        public void SetBorderless()
         {
-            SetWindowLong(Handle, (int)GWL.GWL_STYLE, (int)(WindowStyleFlags.WS_POPUP | WindowStyleFlags.WS_VISIBLE));
+            SetWindowLong(Handle, (int)GWL.GWL_STYLE, (int)WindowStyleFlags.WS_POPUP | (int)WindowStyleFlags.WS_VISIBLE);
         }
 
         /// <summary>
